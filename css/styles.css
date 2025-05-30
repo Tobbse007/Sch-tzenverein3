@@ -1089,35 +1089,85 @@ input[type="checkbox"]:checked {
 }
 
 .mobile-menu-item:last-child {
-    border-bottom: none;
+    border-bottom: none !important;
     margin-top: 1rem; /* Zusätzlicher oberer Abstand für den letzten Menüpunkt (Kontakt-Button) */
 }
 
 /* Spezielle Positionierung für Kontakt-Button in mobilen Menüs */
 .mobile-menu-item[href*="contact"],
+.mobile-menu-item.contact-button,
 #mobile-menu a[href*="contact"] {
-    margin-top: 1rem; /* Zusätzlicher Abstand zum vorherigen Menüpunkt */
-}
-
-/* Kontakt Button Styling in index.html */
-.mobile-menu-item.contact-button {
-    background-color: var(--color-primary);
-    color: white;
-    text-align: center;
-    border-radius: var(--border-radius-sm);
+    margin-top: 1rem !important; /* Zusätzlicher Abstand zum vorherigen Menüpunkt */
     border-bottom: none !important;
-    margin: 0 0.5rem;
-    min-height: 48px;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border: none !important;
 }
 
-.mobile-menu-item.contact-button:hover {
-    background-color: var(--color-primary-dark);
-    color: white;
+/* Element vor dem Kontakt Button sollte keine untere Linie haben */
+.mobile-menu-item + .mobile-menu-separator + .mobile-menu-item.contact-button,
+.mobile-menu-separator + .mobile-menu-item.contact-button {
+    border-top: none !important;
+    border: none !important;
+}
+
+/* Das Element direkt vor dem Separator soll keine untere Linie haben */
+.mobile-menu-item:has(+ .mobile-menu-separator),
+.mobile-menu-item + .mobile-menu-separator {
+    border-bottom: none !important;
+    border: none !important;
+}
+
+/* Alle Elemente direkt vor dem Kontakt-Button sollen keine Border haben */
+.mobile-menu-item:has(+ .mobile-menu-item.contact-button),
+.mobile-menu-item + .mobile-menu-item.contact-button {
+    border-bottom: none !important;
+    border: none !important;
 }
 
 /* Mobile Dropdown Styling - Push-Down-Verhalten mit einheitlicher Größe */
 .mobile-dropdown {
     width: 100%;
+}
+
+/* Kontakt Button Styling - Exakt wie auf der Startseite */
+.mobile-menu-item.contact-button {
+    background-color: var(--color-primary) !important;
+    color: var(--color-white) !important;
+    padding: 0.5rem 1.2rem !important;
+    border-radius: var(--border-radius-sm) !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.01em !important;
+    position: relative !important;
+    overflow: hidden !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+    top: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    border: none !important;
+    border-bottom: none !important;
+    border-top: none !important;
+    font-size: 0.9rem !important;
+    min-height: 2.5rem !important;
+    min-width: max-content !important;
+    touch-action: manipulation !important;
+}
+
+.mobile-menu-item.contact-button:hover {
+    background-color: var(--color-primary-dark) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+.mobile-menu-item.contact-button:active {
+    transform: translateY(2px) !important;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
 }
 
 .mobile-dropdown-button {
@@ -1274,4 +1324,36 @@ input[type="checkbox"]:checked {
   nav.lg\:flex {
     display: none !important;
   }
+}
+
+/* ========== Active Menu Highlighting for Homepage ========== */
+/* Enhanced active menu item styling for Homepage/Startseite */
+.navbar-main nav a[href="index.html"].text-green-700.font-bold,
+.mobile-menu a[href="index.html"].text-green-700.font-bold {
+    color: #15803d !important;
+    font-weight: 700 !important;
+    position: relative;
+}
+
+/* Add underline indicator ONLY on hover for desktop active menu */
+.navbar-main nav a[href="index.html"].text-green-700.font-bold:hover::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #15803d;
+    border-radius: 1px;
+}
+
+/* Mobile active menu styling - only background highlight on hover */
+.mobile-menu a[href="index.html"].text-green-700.font-bold:hover {
+    background-color: rgba(21, 128, 61, 0.1);
+}
+
+/* Ensure active menu item color stays green on hover */
+.navbar-main nav a[href="index.html"].text-green-700.font-bold:hover,
+.mobile-menu a[href="index.html"].text-green-700.font-bold:hover {
+    color: #15803d !important;
 }
